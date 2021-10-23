@@ -16,7 +16,7 @@ public class Main {
         Resident<Education> resident = new Resident<>("Charlie Bloom", birthResident);
         resident.setEducation(education);
         Date birthPatient = new Date(892883737);
-        Patient<ChronicDisease,Education> patient = new Patient<>("Mark Ashford", birthPatient);
+        Patient<ChronicDisease, Education> patient = new Patient<>("Mark Ashford", birthPatient);
 
         LocalDateTime dateOfBirth = LocalDateTime.of(1980, 9, 29, 15, 30);
         LocalDateTime dateOfApplication = LocalDateTime.of(2021, 9, 29, 15, 30);
@@ -98,10 +98,10 @@ public class Main {
 
         List<Dietable> patients = new ArrayList<>();
         Date date = new Date(8264876);
-        Patient<ChronicDisease,Education> patient1 = new Patient<>("Vasia Pupkin", date);
+        Patient<ChronicDisease, Education> patient1 = new Patient<>("Vasia Pupkin", date);
         patient1.setVegetarian();
         patients.add(patient1);
-        Patient<ChronicDisease,Education> patient2 = new Patient<>("Vasia Pupkin", date);
+        Patient<ChronicDisease, Education> patient2 = new Patient<>("Vasia Pupkin", date);
         patients.add(patient2);
         ChronicDisease chronicDisease = new ChronicDisease();
         patient1.setChronicDisease(chronicDisease);
@@ -145,6 +145,8 @@ public class Main {
         residents.put(3, "Trinity");
         residents.put(4, "Agent Smith");
 
+
+        Nurse doctorNurse = new Nurse();
         Nurse nurse = new Nurse();
     }
 }
