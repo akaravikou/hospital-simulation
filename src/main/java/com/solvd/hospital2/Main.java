@@ -145,7 +145,7 @@ public class Main {
         residents.put(3, "Trinity");
         residents.put(4, "Agent Smith");
 
-        Nurse nurse4 = new Nurse();
+        Nurse doctorNurse = new Nurse();
     }
 }
 
