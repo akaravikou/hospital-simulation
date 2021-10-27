@@ -11,6 +11,8 @@
 
     <properties>
         <log4jVersion>2.14.1</log4jVersion>
+        <commonsIoVersion>2.11.0</commonsIoVersion>
+        <commonsVersion>3.12.0</commonsVersion>
     </properties>
 
     <dependencies>
@@ -23,6 +25,16 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4jVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commonsIoVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commonsVersion}</version>
         </dependency>
     </dependencies>
 
@@ -39,5 +51,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

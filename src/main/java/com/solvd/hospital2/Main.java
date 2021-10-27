@@ -144,6 +144,15 @@ public class Main {
         residents.put(2, "Morpheus");
         residents.put(3, "Trinity");
         residents.put(4, "Agent Smith");
+
+        VisitSchedule visit = new VisitSchedule();
+        LOGGER.info(visit.getVisitSchedule());
+
+        EmployeeVacation vacation = new EmployeeVacation();
+        LOGGER.info(vacation.getVacationDays());
+
+        PatientCondition patCond = new PatientCondition();
+        LOGGER.info(patCond.getDoctorAdvice());
     }
 }
 
