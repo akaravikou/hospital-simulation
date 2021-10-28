@@ -144,6 +144,21 @@ public class Main {
         residents.put(2, "Morpheus");
         residents.put(3, "Trinity");
         residents.put(4, "Agent Smith");
+
+        Day today = Day.SUNDAY;
+
+        VisitSchedule visit = new VisitSchedule(today);
+        LOGGER.info(visit.getVisitSchedule());
+
+        JobTitle title = JobTitle.DOCTOR;
+
+        EmployeeVacation vacation = new EmployeeVacation(title);
+        LOGGER.info(vacation.getVacationDays());
+
+        PatientCondition patCond = new PatientCondition();
+        LOGGER.info(patCond.getDoctorAdvice());
+
+        HospitalDirector director = HospitalDirector.createInstance("Alexander Yadkin");
     }
 }
 
