@@ -3,8 +3,11 @@ package com.solvd.hospital2;
 public class VisitSchedule {
 
     private String schedule;
+    private Day day;
 
-    Day day = Day.SUNDAY;
+    public VisitSchedule(Day day) {
+        this.day = day;
+    }
 
     public String getVisitSchedule() {
         switch (day) {
@@ -20,6 +23,8 @@ public class VisitSchedule {
                 break;
             case SUNDAY:
                 schedule = "Visit time: 12:00 - 20:00";
+                break;
+            default:
                 break;
         }
         return schedule;

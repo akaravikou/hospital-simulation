@@ -3,8 +3,11 @@ package com.solvd.hospital2;
 public class EmployeeVacation {
 
     private String vacationDays;
+    private JobTitle position;
 
-    JobTitle position = JobTitle.DOCTOR;
+    public EmployeeVacation(JobTitle position) {
+        this.position = position;
+    }
 
     public String getVacationDays() {
         switch (position) {
@@ -19,6 +22,9 @@ public class EmployeeVacation {
                 break;
             case LABORATORY_ASSISTANT:
                 vacationDays = "Your vacation 29 days";
+                break;
+            default:
+                break;
         }
         return vacationDays;
     }

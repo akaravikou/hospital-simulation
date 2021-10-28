@@ -2,15 +2,16 @@ package com.solvd.hospital2;
 
 public class HospitalDirector {
 
-    private static HospitalDirector name;
+    private static HospitalDirector instance;
+    private String name;
 
-    private HospitalDirector() {
+    private HospitalDirector(String name) {
     }
 
-    public static HospitalDirector getName() {
-        if (name == null) {
-            name = new HospitalDirector();
+    public static HospitalDirector getName(String name) {
+        if (instance == null) {
+            instance = new HospitalDirector(name);
         }
-        return name;
+        return instance;
     }
 }

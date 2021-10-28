@@ -145,14 +145,20 @@ public class Main {
         residents.put(3, "Trinity");
         residents.put(4, "Agent Smith");
 
-        VisitSchedule visit = new VisitSchedule();
+        Day today = Day.SUNDAY;
+
+        VisitSchedule visit = new VisitSchedule(today);
         LOGGER.info(visit.getVisitSchedule());
 
-        EmployeeVacation vacation = new EmployeeVacation();
+        JobTitle title = JobTitle.DOCTOR;
+
+        EmployeeVacation vacation = new EmployeeVacation(title);
         LOGGER.info(vacation.getVacationDays());
 
         PatientCondition patCond = new PatientCondition();
         LOGGER.info(patCond.getDoctorAdvice());
+
+        HospitalDirector director = HospitalDirector.getName("Alexander Yadkin");
     }
 }
 
