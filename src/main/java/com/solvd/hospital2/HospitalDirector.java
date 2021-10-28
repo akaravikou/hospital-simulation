@@ -6,9 +6,10 @@ public class HospitalDirector {
     private String name;
 
     private HospitalDirector(String name) {
+        this.name = name;
     }
 
-    public static HospitalDirector getName(String name) {
+    public static HospitalDirector createInstance(String name) {
         if (instance == null) {
             instance = new HospitalDirector(name);
         }

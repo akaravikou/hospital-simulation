@@ -158,7 +158,7 @@ public class Main {
         PatientCondition patCond = new PatientCondition();
         LOGGER.info(patCond.getDoctorAdvice());
 
-        HospitalDirector director = HospitalDirector.getName("Alexander Yadkin");
+        HospitalDirector director = HospitalDirector.createInstance("Alexander Yadkin");
     }
 }
 
