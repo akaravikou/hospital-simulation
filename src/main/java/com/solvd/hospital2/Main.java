@@ -3,6 +3,8 @@ package com.solvd.hospital2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Consumer;
@@ -19,19 +21,19 @@ public class Main {
 //        Date birthPatient = new Date(892883737);
 //        Patient<ChronicDisease, Education> patient = new Patient<>("Mark Ashford", birthPatient);
 //
-//        LocalDateTime dateOfBirth = LocalDateTime.of(1980, 9, 29, 15, 30);
-//        LocalDateTime dateOfApplication = LocalDateTime.of(2021, 9, 29, 15, 30);
-//        PatientCard card = new PatientCard("Mark Ashford", dateOfBirth, "Illness", dateOfApplication);
+        LocalDateTime dateOfBirth = LocalDateTime.of(1980, 9, 29, 15, 30);
+        LocalDateTime dateOfApplication = LocalDateTime.of(2021, 9, 29, 15, 30);
+        PatientCard card = new PatientCard("Mark Ashford", dateOfBirth, "Illness", dateOfApplication);
 //
 //        Hospital hospital = new Hospital();
 //        List<String> doctors = new ArrayList<>();
-//        LocalDateTime dateOfBirth1 = LocalDateTime.of(1971, 9, 29, 15, 30);
+        LocalDateTime dateOfBirth1 = LocalDateTime.of(1971, 9, 29, 15, 30);
 //        doctors.add("William Dunlop");
 //        doctors.add("Guy Martin");
 //        doctors.add("Valentino Rossi");
 //        doctors.add("Max Biaggi");
-//        LocalDateTime dateOfBirth3 = LocalDateTime.of(1955, 9, 29, 15, 30);
-//        LocalDateTime dateOfBirth5 = LocalDateTime.of(1977, 9, 29, 15, 30);
+        LocalDateTime dateOfBirth3 = LocalDateTime.of(1955, 9, 29, 15, 30);
+        LocalDateTime dateOfBirth5 = LocalDateTime.of(1977, 9, 29, 15, 30);
 //
 //        hospital.setDoctors(doctors);
 //
@@ -161,16 +163,51 @@ public class Main {
 //
 //        HospitalDirector director = HospitalDirector.createInstance("Alexander Yadkin");
 
-        Consumer<String> ambulanceCall = address -> {
-            if(address != null) {
-                LOGGER.info("Call accepted! The ambulance left at: " + address);
-            }
-            else {
-                LOGGER.info("The ambulance crew is free, ready to accept the call.");
-            }
-        };
-        HospitalCallCenter callCenter = new HospitalCallCenter();
-        callCenter.callProcessing(ambulanceCall);
+//        Consumer<String> ambulanceCall = address -> {
+//            if(address != null) {
+//                LOGGER.info("Call accepted! The ambulance left at: " + address);
+//            }
+//            else {
+//                LOGGER.info("The ambulance crew is free, ready to accept the call.");
+//            }
+//        };
+//        HospitalCallCenter callCenter = new HospitalCallCenter();
+//        callCenter.callProcessing(ambulanceCall);
+
+        PatientCard patientCard5 = new PatientCard("Alexander Brod", dateOfBirth1, "head trauma", dateOfBirth5);
+        Class<PatientCard> patientCardClass = PatientCard.class;
+
+        Field diseaseField = patientCardClass.getDeclaredField("disease");
+        diseaseField.setAccessible(true);
+        LOGGER.info("Before change: " + diseaseField.get(patientCard5));
+        diseaseField.set(patientCard5, "Ache");
+        LOGGER.info("After change: " + diseaseField.get(patientCard5));
+
+        Field dateOfApplicationField = patientCardClass.getDeclaredField("dateOfApplication");
+        dateOfApplicationField.setAccessible(true);
+        LOGGER.info("Before change: " + dateOfApplicationField.get(patientCard5));
+        dateOfApplicationField.set(patientCard5, dateOfBirth1);
+        LOGGER.info("After change: " + dateOfApplicationField.get(patientCard5));
+
+        Method getDiseaseMethod = patientCardClass.getMethod("getDisease");
+        Object resultDisease = getDiseaseMethod.invoke(patientCard5);
+        LOGGER.info(resultDisease);
+
+        Method setDiseaseMethod = patientCardClass.getMethod("setDisease", String.class);
+        setDiseaseMethod.invoke(patientCard5, "Broken legs");
+        LOGGER.info(patientCard5.getDisease());
+
+        Method getDateOfApplicationMethod = patientCardClass.getMethod("getDateOfApplication");
+        Object resultGetDateOfApplication = getDateOfApplicationMethod.invoke(patientCard5);
+        LOGGER.info(resultGetDateOfApplication);
+
+        Method setDateOfApplicationMethod = patientCardClass.getMethod("setDateOfApplication", LocalDateTime.class);
+        setDateOfApplicationMethod.invoke(patientCard5, dateOfBirth3);
+        LOGGER.info(patientCard5.getDateOfApplication());
+
+        Method printMethod = patientCardClass.getMethod("print");
+        Object resultPrint = printMethod.invoke(patientCard5);
+        LOGGER.info(resultPrint);
     }
 }
 

@@ -21,13 +21,13 @@ public class HospitalCallCenter {
         Integer button = scanner.nextInt();
         scanner.nextLine();
 
-        switch(button) {
-            case(1):
+        switch (button) {
+            case (1):
                 LOGGER.info("Please tell your address");
                 address = scanner.nextLine();
                 break;
-            case(2):
-            case(3):
+            case (2):
+            case (3):
                 LOGGER.info("Stay on line");
                 break;
             default:
