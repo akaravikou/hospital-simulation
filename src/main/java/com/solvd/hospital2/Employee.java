@@ -78,7 +78,6 @@ public class Employee {
         OptionalInt opt = intStream1.filter(x -> x > 200).findFirst();
         opt.orElseThrow(() -> new RuntimeException("No value"));
         LOGGER.info(opt.getAsInt());
-
     }
 }
 

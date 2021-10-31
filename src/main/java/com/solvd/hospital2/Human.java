@@ -13,7 +13,6 @@ public abstract class Human {
     }
 
     public Human() {
-
     }
 
     public String getName() {
