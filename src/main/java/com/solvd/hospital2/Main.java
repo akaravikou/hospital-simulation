@@ -8,8 +8,6 @@ import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Main {
 
@@ -22,11 +20,11 @@ public class Main {
         resident.setEducation(education);
         Date birthPatient = new Date(892883737);
         Patient<ChronicDisease, Education> patient = new Patient<>("Mark Ashford", birthPatient);
-//
+
         LocalDateTime dateOfBirth = LocalDateTime.of(1980, 9, 29, 15, 30);
         LocalDateTime dateOfApplication = LocalDateTime.of(2021, 9, 29, 15, 30);
         PatientCard card = new PatientCard("Mark Ashford", dateOfBirth, "Illness", dateOfApplication);
-//
+
         Hospital hospital = new Hospital();
         List<String> doctors = new ArrayList<>();
         LocalDateTime dateOfBirth1 = LocalDateTime.of(1971, 9, 29, 15, 30);
