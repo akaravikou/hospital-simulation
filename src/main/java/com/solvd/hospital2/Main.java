@@ -3,6 +3,7 @@ package com.solvd.hospital2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
@@ -164,10 +165,9 @@ public class Main {
         HospitalDirector director = HospitalDirector.createInstance("Alexander Yadkin");
 
         Consumer<String> ambulanceCall = address -> {
-            if(address != null) {
+            if (address != null) {
                 LOGGER.info("Call accepted! The ambulance left at: " + address);
-            }
-            else {
+            } else {
                 LOGGER.info("The ambulance crew is free, ready to accept the call.");
             }
         };
@@ -175,7 +175,8 @@ public class Main {
         callCenter.callProcessing(ambulanceCall);
 
         PatientCard patientCard5 = new PatientCard("Alexander Brod", dateOfBirth1, "head trauma", dateOfBirth5);
-        Class<PatientCard> patientCardClass = PatientCard.class;
+
+        Class<?> patientCardClass = Class.forName("com.solvd.hospital2.PatientCard");
 
         Field diseaseField = patientCardClass.getDeclaredField("disease");
         diseaseField.setAccessible(true);

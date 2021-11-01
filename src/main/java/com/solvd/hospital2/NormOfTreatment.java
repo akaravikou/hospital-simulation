@@ -13,6 +13,7 @@ public class NormOfTreatment {
     private static Integer minDayStayHospital = 7;
 
     private String decision;
+    private Integer days;
 
     public String getDecision() {
         return decision;
@@ -38,22 +39,23 @@ public class NormOfTreatment {
             throw new EnterException("You enter incorrect answer");
         }
         if (decision.equals("yes")) {
-            for (int i = 1; i < 10; i++) {
-                LOGGER.info("For " + i + " days ? (yes/no)");
-                String increase = scanner.next();
-                if (!increase.equals("yes") && !increase.equals("no")) {
-                    throw new EnterException("You enter incorrect answer");
-                }
-                if (increase.equals("yes")) {
-                    LOGGER.info("Well we will increase your stay on " + i + " days");
-                    break;
-                } else {
-                    LOGGER.info("Are you sure?");
-                }
+            IntStream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+                    .forEach(x -> {
+                        LOGGER.info("For " + x + " days ? (yes/no)");
+                        String increase = scanner.next();
+                        if ("yes".equals(increase)) {
+                            days = x;
+                        } else if ("no".equals(increase)) {
+                            LOGGER.info("Are you sure?");
+                        } else {
+                            throw new EnterException("You enter incorrect answer");
+                        }
+                    });
+            if (days != 0) {
+                LOGGER.info("Well we will increase your stay on " + days + " days");
+            } else {
+                LOGGER.info("This is your right");
             }
-        } else {
-            LOGGER.info("This is your right");
         }
     }
 }
-
