@@ -179,7 +179,7 @@ public class Main {
         Class[] parameterType = new Class[] {String.class, String.class};
         Constructor<PatientCard> constructor = patientCardClass.getConstructor(parameterType);
         Object[] obj = new Object[] {new String("Danila Danilin"), new String("Ache")};
-        Object object = constructor.newInstance("Dan Beard", "Stomach");
+        Object object = constructor.newInstance(obj);
 
         Field diseaseField = patientCardClass.getDeclaredField("disease");
         diseaseField.setAccessible(true);
