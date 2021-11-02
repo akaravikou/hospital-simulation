@@ -94,6 +94,7 @@ public class Main {
         cards.add(2, card);
         CardIndex cardIndex = new CardIndex(cards);
         PatientCard patientCard = new PatientCard("pacient name", dateOfBirth1, "head trauma", dateOfBirth5);
+        PatientCard patientCard5 = new PatientCard("Alexander Brod", dateOfBirth1, "head trauma", dateOfBirth5);
         Doctor doctorHouseCard = new Doctor("Doctor House", dateOfBirth3, "super therapeut");
         cardIndex.addCard(patientCard);
         cardIndex.addCard(doctorHouseCard);
@@ -174,9 +175,11 @@ public class Main {
         HospitalCallCenter callCenter = new HospitalCallCenter();
         callCenter.callProcessing(ambulanceCall);
 
-        PatientCard patientCard5 = new PatientCard("Alexander Brod", dateOfBirth1, "head trauma", dateOfBirth5);
-
-        Class<?> patientCardClass = Class.forName("com.solvd.hospital2.PatientCard");
+        Class<PatientCard> patientCardClass = PatientCard.class;
+        Class[] parameterType = new Class[] {String.class, String.class};
+        Constructor<PatientCard> constructor = patientCardClass.getConstructor(parameterType);
+        Object[] obj = new Object[] {new String("Danila Danilin"), new String("Ache")};
+        Object object = constructor.newInstance("Dan Beard", "Stomach");
 
         Field diseaseField = patientCardClass.getDeclaredField("disease");
         diseaseField.setAccessible(true);

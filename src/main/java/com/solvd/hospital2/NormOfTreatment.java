@@ -39,7 +39,7 @@ public class NormOfTreatment {
             throw new EnterException("You enter incorrect answer");
         }
         if (decision.equals("yes")) {
-            IntStream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+            IntStream.range(1, 11)
                     .forEach(x -> {
                         LOGGER.info("For " + x + " days ? (yes/no)");
                         String increase = scanner.next();

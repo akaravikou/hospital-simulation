@@ -18,6 +18,11 @@ public class PatientCard extends PersonCard {
         this.dateOfApplication = dateOfApplication;
     }
 
+    public PatientCard(String name, String disease) {
+        super(name);
+        this.disease = disease;
+    }
+
     public String getDisease() {
         return disease;
     }
