@@ -180,6 +180,7 @@ public class Main {
         Constructor<PatientCard> constructor = patientCardClass.getConstructor(parameterType);
         Object[] obj = new Object[] {new String("Danila Danilin"), new String("Ache")};
         Object object = constructor.newInstance(obj);
+        LOGGER.info(object);
 
         Field diseaseField = patientCardClass.getDeclaredField("disease");
         diseaseField.setAccessible(true);
