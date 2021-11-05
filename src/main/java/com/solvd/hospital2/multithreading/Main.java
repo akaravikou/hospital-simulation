@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Main {
@@ -34,9 +35,14 @@ public class Main {
         ExecutorService executorService = Executors.newFixedThreadPool(5);
         IntStream.range(0, 100)
                 .boxed()
-                .forEach(x -> {
+                .map(x -> {
                     CompletableFuture<Void> completableFuture = CompletableFuture.supplyAsync(() ->
                             new Connection(), executorService).thenAccept(connection -> connection.read());
-                });
+                    return completableFuture;
+                })
+                .collect(Collectors.toList())
+                .forEach(CompletableFuture::join);
+        CompletableFuture.allOf();
+        executorService.shutdown();
     }
 }
