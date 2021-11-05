@@ -1,5 +1,9 @@
 package com.solvd.hospital2;
 
+import com.solvd.hospital2.documentation.*;
+import com.solvd.hospital2.maintainance.*;
+import com.solvd.hospital2.personal_info.*;
+import com.solvd.hospital2.staff.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -178,7 +182,7 @@ public class Main {
         Class<PatientCard> patientCardClass = PatientCard.class;
         Class[] parameterType = new Class[] {String.class, String.class};
         Constructor<PatientCard> constructor = patientCardClass.getConstructor(parameterType);
-        Object[] obj = new Object[] {new String("Danila Danilin"), new String("Ache")};
+        Object[] obj = new Object[] {"Danila Danilin", "Ache"};
         Object object = constructor.newInstance(obj);
         LOGGER.info(object);
 
