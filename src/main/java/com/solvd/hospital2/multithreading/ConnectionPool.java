@@ -2,45 +2,51 @@ package com.solvd.hospital2.multithreading;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ConnectionPool {
 
-    private static ConnectionPool instance = null;
+    private volatile static ConnectionPool instance = null;
 
-    List<Connection> availableConnections = new ArrayList<>();
-    List<Connection> usedConnections = new ArrayList<>();
-    private Integer quantityConnection;
+    private final List<Connection> availableConnections;
 
     private ConnectionPool(Integer quantityConnection) {
-        this.quantityConnection = quantityConnection;
-        for (int i = 0; i < quantityConnection; i++) {
-            this.availableConnections.add(new Connection());
-            new Thread((Runnable) this.availableConnections.get(i)).start();}
-        }
+        this.availableConnections = new ArrayList<>();
+        IntStream.range(0, quantityConnection)
+                .boxed()
+                .forEach(x -> {
+                    this.availableConnections.add(new Connection());
+                });
+    }
 
-    public static ConnectionPool getInstance(){
-        if (instance==null)
-            instance = new ConnectionPool(10);
+    public static ConnectionPool getInstance(Integer quantityConnection) {
+        if (instance == null) {
+            synchronized (ConnectionPool.class) {
+                if (instance == null) {
+                    instance = new ConnectionPool(quantityConnection);
+                }
+            }
+        }
         return instance;
     }
 
-    private static Connection getConnection() {
-        Connection connection = null;
-        try {
-            connection = new Connection();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public Connection getConnection() {
+        synchronized (this.availableConnections) {
+            while (this.availableConnections.isEmpty()) {
+                try {
+                    availableConnections.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return connection;
+        return availableConnections.remove(0);
     }
 
-    public synchronized void releaseConnection (Connection connection) throws NullPointerException {
-        if (connection != null) {
-            if (usedConnections.remove(connection)) {
-                availableConnections.add(connection);
-            } else {
-                throw new NullPointerException("Connection not in the usedConnections");
-            }
+    public void releaseConnection(Connection connection) {
+        synchronized (this.availableConnections) {
+            this.availableConnections.add(connection);
+            this.availableConnections.notifyAll();
         }
     }
 }

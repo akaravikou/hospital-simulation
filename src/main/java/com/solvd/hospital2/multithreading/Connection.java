@@ -1,6 +1,5 @@
 package com.solvd.hospital2.multithreading;
 
-import com.solvd.hospital2.Main;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
