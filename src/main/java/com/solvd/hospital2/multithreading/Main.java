@@ -8,6 +8,8 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.*;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -40,9 +42,12 @@ public class Main {
                             new Connection(), executorService).thenAccept(connection -> connection.read());
                     return completableFuture;
                 })
-                .collect(Collectors.toList())
-                .forEach(CompletableFuture::join);
-        CompletableFuture.allOf();
+                .collect(collectingAndThen(
+                        toList(),
+                        x -> CompletableFuture.allOf(x.toArray(new CompletableFuture[0]))
+                                .thenApply(__ -> x.stream()
+                                        .map(CompletableFuture::join)
+                                        .collect(Collectors.toList()))));
         executorService.shutdown();
     }
 }
